@@ -21,6 +21,7 @@ int main(int, char **)
     std::cout << "a: " << doc["a"].GetInt() << std::endl;
     std::cout << "b: " << doc["b"].GetInt() << std::endl;
     std::cout << "c: " << doc["c"].GetInt() << std::endl;
+    std::cout << " ---- " << std::endl;
 
     // change value
     doc["a"].SetInt(7); 
