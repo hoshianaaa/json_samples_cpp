@@ -13,8 +13,15 @@ int main(int, char **)
 
     // read file
     std::ifstream ifs("sample.json");
+
+    if (!ifs)
+    {
+      std::cout << "file not exist" << std::endl;
+    }
+
     IStreamWrapper isw(ifs);
 
+/*
     Document doc;
     doc.ParseStream(isw);
 
@@ -36,4 +43,5 @@ int main(int, char **)
 
     Writer<OStreamWrapper> writer(osw);
     doc.Accept(writer);    
+    */
 }
