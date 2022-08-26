@@ -6,6 +6,8 @@
 #include "rapidjson/ostreamwrapper.h"
 #include "rapidjson/writer.h"
 
+
+
 using namespace rapidjson;
 
 int main(int, char **)
@@ -25,8 +27,11 @@ int main(int, char **)
       d.Parse(json.c_str());
 
       // write file
-      std::ofstream ofs("sample.json");
-      //std::ofstream ofs("~/.ros/sample.json");
+//      std::ofstream ofs("sample.json");
+
+      std::string home_dir = std::getenv("HOME");
+      std::cout << "home dir:" << home_dir << std::endl;
+      std::ofstream ofs(home_dir + "/.ros/sample.json");
       OStreamWrapper osw(ofs);
 
       Writer<OStreamWrapper> writer(osw);
