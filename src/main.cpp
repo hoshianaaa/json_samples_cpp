@@ -17,31 +17,48 @@ int main(int, char **)
     if (!ifs)
     {
       std::cout << "file not exist" << std::endl;
+
+      // (ref) 
+      // https://www.qoosky.io/techs/5bc254637c
+      std::string json = "{\"project\":\"rapidjson\",\"stars\":10}";
+      rapidjson::Document d;
+      d.Parse(json.c_str());
+
+      // write file
+      std::ofstream ofs("sample.json");
+      //std::ofstream ofs("~/.ros/sample.json");
+      OStreamWrapper osw(ofs);
+
+      Writer<OStreamWrapper> writer(osw);
+      d.Accept(writer);    
+
+    }
+    else
+    {
+
+      IStreamWrapper isw(ifs);
+
+      Document doc;
+      doc.ParseStream(isw);
+
+      std::cout << "a: " << doc["a"].GetInt() << std::endl;
+      std::cout << "b: " << doc["b"].GetInt() << std::endl;
+      std::cout << "c: " << doc["c"].GetInt() << std::endl;
+      std::cout << " ---- " << std::endl;
+
+      // change value
+      doc["a"].SetInt(7); 
+
+      std::cout << "a: " << doc["a"].GetInt() << std::endl;
+      std::cout << "b: " << doc["b"].GetInt() << std::endl;
+      std::cout << "c: " << doc["c"].GetInt() << std::endl;
+
+      // write file
+      std::ofstream ofs("output.json");
+      OStreamWrapper osw(ofs);
+
+      Writer<OStreamWrapper> writer(osw);
+      doc.Accept(writer);    
     }
 
-    IStreamWrapper isw(ifs);
-
-/*
-    Document doc;
-    doc.ParseStream(isw);
-
-    std::cout << "a: " << doc["a"].GetInt() << std::endl;
-    std::cout << "b: " << doc["b"].GetInt() << std::endl;
-    std::cout << "c: " << doc["c"].GetInt() << std::endl;
-    std::cout << " ---- " << std::endl;
-
-    // change value
-    doc["a"].SetInt(7); 
-
-    std::cout << "a: " << doc["a"].GetInt() << std::endl;
-    std::cout << "b: " << doc["b"].GetInt() << std::endl;
-    std::cout << "c: " << doc["c"].GetInt() << std::endl;
-
-    // write file
-    std::ofstream ofs("output.json");
-    OStreamWrapper osw(ofs);
-
-    Writer<OStreamWrapper> writer(osw);
-    doc.Accept(writer);    
-    */
 }
