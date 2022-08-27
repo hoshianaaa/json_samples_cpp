@@ -32,9 +32,25 @@ int main(int, char **)
       // write file
 //      std::ofstream ofs("sample.json");
 
-      std::string home_dir = std::getenv("HOME");
-      std::cout << "home dir:" << home_dir << std::endl;
-      std::ofstream ofs(home_dir + "/.ros/sample.json");
+      std::string str = "~/.ros/sample.json";
+      std::string f_name;
+
+      if (str[0] == "~")
+      {
+        str.erase(0, 1);
+        
+        std::string home_dir = std::getenv("HOME");
+        std::cout << "home dir:" << home_dir << std::endl;
+
+        f_name = home_dir + str;
+      }
+      else
+      {
+        f_name = str;
+      }
+
+      std::ofstream ofs(str);
+
       OStreamWrapper osw(ofs);
 
       Writer<OStreamWrapper> writer(osw);
