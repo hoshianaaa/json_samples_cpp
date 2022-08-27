@@ -12,3 +12,7 @@ catkin_package(
 add_executable(main src/main.cpp) 
 target_link_libraries(main 
 )
+
+add_executable(main2 src/main2.cpp) 
+target_link_libraries(main2
+)
