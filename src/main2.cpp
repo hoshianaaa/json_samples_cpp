@@ -6,9 +6,12 @@
 #include "rapidjson/ostreamwrapper.h"
 #include "rapidjson/writer.h"
 
-
-
 using namespace rapidjson;
+
+std::vector<double> json_read(std::string file_name)
+{
+
+}
 
 int main(int, char **)
 {
@@ -50,7 +53,8 @@ int main(int, char **)
 
       assert(a.IsArray());
 for (SizeType i = 0; i < a.Size(); i++) // Uses SizeType instead of size_t
-        printf("a[%d] = %d\n", i, a[i].GetInt());
+//        printf("a[%d] = %d\n", i, a[i].GetInt());
+        std::cout <<  a[i].GetDouble() << std::endl;
 
       // write file
       std::ofstream ofs("output.json");
