@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <vector>
 
 #include "rapidjson/document.h"
 #include "rapidjson/istreamwrapper.h"
@@ -35,7 +36,7 @@ int main(int, char **)
       std::string str = "~/.ros/sample.json";
       std::string f_name;
 
-      if (str[0] == "~")
+      if (str[0] == '~')
       {
         str.erase(0, 1);
         
